@@ -1,0 +1,51 @@
+{% extends "views/layouts/base.njk" %}
+{% block menu %}
+<div class="columns is-centered mt-6">
+    <div class="column">
+      <table class="table is-fullwidth box">
+        <thead>
+          <tr>
+            <th><abbr title="Id">ID</abbr></th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Model Year</th>
+            <th>Mileage</th>
+            <th>Colors</th>
+            <th>Air-conditioning</th>
+            <th>Passengers</th>
+            <th>Transmission</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            {% for item in items %}
+            <td>1</td>
+            <td>BWM</td>
+            <td>Serie 3</td>
+            <td>1998</td>
+            <td>5000 kilometers</td>
+            <td>Blue</td>
+            <td>Yes</td>
+            <td>4</td>
+            <td>Manual</td>
+            <td>Image</td>
+            <td>$40.000</td>
+            <td>
+              <div class="buttons">
+                <button class="button is-primary">View</button>
+                <button class="button is-link">Edit</button>
+                <button class="button is-danger">Delete</button>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          <li>This would display if the 'item' collection were empty</li>
+          {% endfor %}
+        </tfoot>
+      </table>
+    </div>
+   </div>
+{% endblock %}

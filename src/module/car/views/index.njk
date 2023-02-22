@@ -1,0 +1,8 @@
+
+{% extends "views/layouts/base.njk" %}
+  {% for item in items %}
+
+  {% else %}
+    <li>This would display if the 'item' collection were empty</li>
+  {% endfor %}
+
