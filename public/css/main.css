@@ -1,0 +1,43 @@
+html { height: 100% } 
+body { min-height: 100% }
+.navbar{
+    grid-area: navbar;
+}
+.menu{
+    grid-area: menu;
+}
+footer{
+    grid-area: footer;
+    padding: 1rem 1.5rem 2rem !important;
+}
+.grid-container{
+    display: grid;
+	grid-template:
+		'navbar' 3em
+		'menu' auto
+		'footer' 20px;
+}
+
+@media (min-width: 540px) {
+	.grid-contenedor {
+		grid-template:
+			'navbar navbar' 60px
+			'menu menu' auto
+			'footer footer' 60px /
+			auto 100px;
+	}
+}
+
+@media (min-width: 960px) {
+	.grid-contenedor {
+		grid-template:
+			'navbar navbar navbar' 80px
+			'menu menu menu' auto
+            'footer footer footer' 60px /
+			200px auto 200px;
+	}
+}
+
+.text-info{
+    color: solid green
+}
