@@ -20,26 +20,39 @@ module.exports = class UserController {
 
   configureRoutes(app) {
     const ROUTE = this.ROUTE_BASE;
-    app.get(`${ROUTE}/view/:id`, this.profile.bind(this));
+
+    app.get(`${ROUTE}/manage`, this.manage.bind(this));
+    app.get(`${ROUTE}/view/:id`, this.view.bind(this));
     app.get(`${ROUTE}/edit/:id`, this.edit.bind(this));
-    app.get(`${ROUTE}/register`, this.register.bind(this));
-    app.get(`${ROUTE}/login`, this.login.bind(this));
-    app.post(`${ROUTE}/save`, this.uploadMiddleware.single('photo'), this.save.bind(this));
-    app.get(`${ROUTE}/delete/:id`, this.delete.bind(this));
+    app.get(`${ROUTE}/add`, this.create.bind(this));
+    app.post(`${ROUTE}/save`, this.save.bind(this));
   }
 
   /**
    * @param {import('express').Request} req
    * @param {import('express').Response} res
    */
-  async profile(req, res) {
+  async manage(req, res) {
+    const user = await this.userService.getAll();
+    res.render('user/views/manage.njk', {
+      user,
+    });
+  }
+
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
+  async view(req, res) {
     const { id } = req.params;
-    if (!id) {
+    if (!Number(id)) {
       throw new UserIdNotDefinedError();
     }
-    const user = await this.userService.getById(id);
-    res.render('user/views/profile.njk', {
+
+    const { user, reservations } = await this.userService.getById(id);
+    res.render('user/views/view.njk', {
       user,
+      reservations,
     });
   }
 
@@ -63,16 +76,8 @@ module.exports = class UserController {
    * @param {import('express').Request} req
    * @param {import('express').Response} res
    */
-  async register(req, res) {
-    res.render('user/views/register.njk');
-  }
-
-  /**
-   * @param {import('express').Request} req
-   * @param {import('express').Response} res
-   */
-  async login(req, res) {
-    res.render('user/views/login.njk');
+  async create(req, res) {
+    res.render('user/views/create.njk');
   }
 
   /**
