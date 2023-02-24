@@ -1,6 +1,6 @@
 {% extends "views/layouts/base.njk" %}
-{% block menu %}
-<form class="container mt-4 box" action="/car/save" method="POST" enctype="multipart/form-data">
+{% block container %}
+<form class="container mt-4 box has-background-link" action="/car/save" method="POST" enctype="multipart/form-data">
     <h2 class="title">Create a New Car</h2>
       <div class="columns is-multiline is-variable is-2-mobile is-0-tablet is-4-desktop is-8-widescreen is-1-fullhd">
         <div class="column is-half">
@@ -53,11 +53,11 @@
             <label class="label">Air-conditioning</label>
             <div class="control">
               <label class="radio">
-                <input type="radio" name="air_conditioning" value="yes">
+                <input type="radio" name="air" value="Yes" checked>
                 Yes
               </label>
               <label class="radio">
-                <input type="radio" name="air_conditioning" value="no">
+                <input type="radio" name="air" value="No">
                 No
               </label>
             </div>
@@ -69,7 +69,7 @@
                 <span class="icon is-small is-left">
                   <i class="fa-sharp fa-solid fa-person"></i>
                 </span>
-                <select name="passengers">
+                <select name="passenger">
                   <option disabled value="">Select an option</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -88,7 +88,7 @@
           <div class="field">
             <label class="label">Image</label>
             <div class="control has-icons-left">
-              <input class="input" type="file" name="image_car">
+              <input class="input" type="file" name="img">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-image"></i>
               </span>
@@ -100,8 +100,8 @@
               <div class="select">
                 <select name="transmission">
                   <option value="" disabled>Select an option</option>
-                  <option value="manual">Manual</option>
-                  <option value="automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                  <option value="Automatic">Automatic</option>
                 </select>
               </div>
             </div>
@@ -119,9 +119,9 @@
       </div>
       <div class="field is-grouped is-grouped-centered">
         <p class="control">
-          <a href="form-car" class="button is-primary">
+          <button type="submit" class="button is-primary">
             Submit
-          </a>
+          </button>
         </p>
         <p class="control">
           <a href="/" class="button is-light">

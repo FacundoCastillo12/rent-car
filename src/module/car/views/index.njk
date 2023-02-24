@@ -1,8 +1,178 @@
-
 {% extends "views/layouts/base.njk" %}
-  {% for item in items %}
+{% block menu %}
+
+  {% for car in cars %}
+    <div class="columns is-multiline is-variable is-2-mobile is-0-tablet is-4-desktop is-8-widescreen is-1-fullhd m-4">
+      <div class="column">
+        <div class="box m-4 mb-4">
+          <figure class="image is-square">
+            <img src="/../{{car.img}}" />
+          </figure>
+          <div class="columns">
+            <div class="column">
+              <nav class="level is-mobile box">
+                <div class="level-item has-text-centered">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-car"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path>
+                    </svg>
+                    <p class="text">{{car.brand}} {{car.model}}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-user"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                      </svg>
+                    </p>
+                    <p class="text">{{car.passenger}}</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-snowflake"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M10 4l2 1l2 -1"></path>
+                      <path d="M12 2v6.5l3 1.72"></path>
+                      <path d="M17.928 6.268l.134 2.232l1.866 1.232"></path>
+                      <path d="M20.66 7l-5.629 3.25l.01 3.458"></path>
+                      <path d="M19.928 14.268l-1.866 1.232l-.134 2.232"></path>
+                      <path d="M20.66 17l-5.629 -3.25l-2.99 1.738"></path>
+                      <path d="M14 20l-2 -1l-2 1"></path>
+                      <path d="M12 22v-6.5l-3 -1.72"></path>
+                      <path d="M6.072 17.732l-.134 -2.232l-1.866 -1.232"></path>
+                      <path d="M3.34 17l5.629 -3.25l-.01 -3.458"></path>
+                      <path d="M4.072 9.732l1.866 -1.232l.134 -2.232"></path>
+                      <path d="M3.34 7l5.629 3.25l2.99 -1.738"></path>
+                    </svg>
+                    <p class="text">{{car.air}}
+                    </p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-manual-gearbox"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M5 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M12 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M19 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M5 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M12 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                      <path d="M5 8l0 8"></path>
+                      <path d="M12 8l0 8"></path>
+                      <path d="M19 8v2a2 2 0 0 1 -2 2h-12"></path>
+                    </svg>
+                    <p class="text">
+                      {{car.transmission}}
+                    </p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-calendar-time"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                      <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                      <path d="M15 3v4"></path>
+                      <path d="M7 3v4"></path>
+                      <path d="M3 11h16"></path>
+                      <path d="M18 16.496v1.504l1 1"></path>
+                    </svg>
+                    <p class="text">{{car.year}}</p>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div>
+                <a href="/car/view/{{car.id}}" class="button is-primary">View</a>
+                <a href="/car/edit/{{car.id}}" class="button is-info">Edit</a>
+                <a href="/car/delete/{{car.id}}" class="button is-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
 
   {% else %}
-    <li>This would display if the 'item' collection were empty</li>
-  {% endfor %}
 
+
+
+      <div class="box mt-4 has-background-danger">
+        <p class="has-text-white is-size-2">At the moment there is no car available.</p>
+        <div>
+          <p class="has-text-white is-size-2" >Add one.</p>
+          <a class="button is-large is-success" href="/car/add">
+            Add
+          </a>
+        </div>
+
+
+      </div>
+    {% endfor %}
+{% endblock %}

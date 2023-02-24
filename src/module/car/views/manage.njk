@@ -1,8 +1,10 @@
-{% extends "views/layouts/base.njk" %}
-{% block menu %}
+{% extends "views/layouts/base.njk" %} 
+{% block container %}
+
 <div class="columns is-centered mt-6">
-    <div class="column">
-      <table class="table is-fullwidth box">
+  <div class="column">
+    <div class="table-container">
+      <table class="table is-fullwidth box is-striped is-hoverable is-responsive">
         <thead>
           <tr>
             <th><abbr title="Id">ID</abbr></th>
@@ -15,37 +17,44 @@
             <th>Passengers</th>
             <th>Transmission</th>
             <th>Image</th>
+            <th>Rent</th>
+            <th>Date of delivery</th>
             <th>Price</th>
             <th>Action</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            {% for item in items %}
-            <td>1</td>
-            <td>BWM</td>
-            <td>Serie 3</td>
-            <td>1998</td>
-            <td>5000 kilometers</td>
-            <td>Blue</td>
-            <td>Yes</td>
-            <td>4</td>
-            <td>Manual</td>
-            <td>Image</td>
-            <td>$40.000</td>
+            {% for car in cars %}
+            <td>{{ car.id }}</td>
+            <td>{{ car.brand }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.year }}</td>
+            <td>{{ car.kms }}</td>
+            <td>{{ car.colour }}</td>
+            <td>{{ car.air }}</td>
+            <td>{{ car.passenger }}</td>
+            <td>{{ car.transmission }}</td>
+            <td>
+              <img src="\..\{{ car.img }}" alt="Photo of a car:{{ car.brand }} {{ car.model }}" />
+            </td>
+            <td><a>@Usuario</a></td>
+            <td>Date</td>
+            <td>${{ car.price }}</td>
             <td>
               <div class="buttons">
-                <button class="button is-primary">View</button>
-                <button class="button is-link">Edit</button>
-                <button class="button is-danger">Delete</button>
+                <a href="/car/view/{{ car.id }}" class="button is-primary">View</a>
+                <a href="/car/edit/{{ car.id }}" class="button is-info">Edit</a>
+                <a href="/car/delete/{{ car.id }}" class="button is-danger">Delete</a>
               </div>
             </td>
           </tr>
           {% else %}
-          <li>This would display if the 'item' collection were empty</li>
+          <div>This would display if the 'item' collection were empty</div>
           {% endfor %}
         </tfoot>
       </table>
     </div>
-   </div>
+  </div>
+</div>
 {% endblock %}
