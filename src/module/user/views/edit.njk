@@ -1,0 +1,115 @@
+{% extends "views/layouts/base.njk" %}
+{% block container %}
+<form class="container mt-6 m-2 box" action="/car/save" method="POST" enctype="multipart/form-data">
+    <div class="mb-2 mt-4">
+      <h1 class="title">Edit user settings</h1>
+    </div>
+    <div class="box columns is-multiline is-variable is-2-mobile is-0-tablet is-4-desktop is-8-widescreen is-1-fullhd m-4">
+      <div class="column is-half">
+        <div class="">
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="User" name="user" maxlength="20"/>
+              <span class="icon is-small is-left">
+                <i class="fa-solid fa-user"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input" type="email" placeholder="Email" name="email" maxlength="25"/>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input" type="password" placeholder="Password" name="password" maxlength="20"/>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Phone" name="phone" maxlength="15"/>
+              <span class="icon is-small is-left">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="First name" name="first_name" maxlength="30"/>
+              <span class="icon is-small is-left">
+                <i class="fa-solid fa-circle-info"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Last name" name="first_name" maxlength="30"/>
+              <span class="icon is-small is-left">
+                <i class="fa-solid fa-circle-info"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <span class="select">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </span>
+                <select class="country">
+                  <option value="" disabled>Country</option>
+                  <option>Argentina</option>
+                  <option>Chile</option>
+                  <option>Uruguay</option>
+                  <option>Paraguay</option>
+                </select>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="text" placeholder="Profile company" name="subtitle" maxlength="50"/>
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-building"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Profile photo</label>
+          <div class="control has-icons-left">
+            <input class="input" type="file" name="photo" >
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-image"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <textarea class="textarea is-info" placeholder="Profile bio" name="bio" maxlength="120"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="column mt-4 is-centered">
+        <button class="button is-success ">
+          <span class="icon is-small">
+            <i class="fas fa-check"></i>
+          </span>
+          <span>Save</span>
+        </button>
+        <button class="button is-danger is-outlined">
+          <span>Cancel</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+  </form>
+  {% endblock %}

@@ -1,0 +1,86 @@
+{% extends "views/layouts/base.njk" %}
+  {% block container %}
+  <form>
+    <div class="box m-6 has-background-info">
+      <div class="mb-2">
+        <h1 class="title">Register</h1>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="User" name="user">
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-user"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="email" placeholder="Email" name="email">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="password" placeholder="Password" name="password">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Phone" name="phone">
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="First name" name="firstName">
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-circle-info"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Last name" name="lastName">
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-circle-info"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <span class="select">
+            <span class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </span>
+            <select class="country">
+              <option value="" disabled>Country</option>
+              <option>Argentina</option>
+              <option>Chile</option>
+              <option>Uruguay</option>
+              <option>Paraguay</option>
+            </select>
+          </span>
+        </p>
+      </div>
+
+      <div class="field">
+        <p class="control">
+          <button type="submit" class="button is-success">
+            Register
+          </button>
+        </p>
+      </div>
+    </div>
+    </form>
+    {% endblock %}

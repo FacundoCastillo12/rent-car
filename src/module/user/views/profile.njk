@@ -1,0 +1,78 @@
+{% extends "views/layouts/base.njk" %}
+{% block menu %}
+<div class="columns is-multiline is-centered box m-4">
+    <div class="column is-12-tablet">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="columns is-flex is-centered">
+            <figure class="image is-128x128">
+              <img class="is-rounded" src="https://via.placeholder.com/128x128" alt="Profile Image">
+            </figure>
+          </div>
+          <h1 class="title is-4 has-text-centered">@User1</h1>
+          <h2 class="subtitle is-6 has-text-centered">Car rental company with capital location.</h2>
+          <p class="has-text-centered">The best rental company!</p>
+          <div class="buttons is-centered">
+            <a href="#" class="button is-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="button is-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="button is-link"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+      </div>
+      <aside class="menu">
+        <p class="menu-label mt-4">Control panel</p>
+        <div class="columns">
+          
+          <div class="column">
+            <a class="button is-info is-light" href="#">Add car</a>
+          </div>
+          <div class="column">
+            <a class="button is-info is-light" href="#">Manager car</a>
+          </div>
+          <div class="column">
+            <a class="button is-info is-light" href="#">Edit User</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+    <div class="column is-8-desktop is-12-tablet">
+      <div class="">
+        <h1 class="title is-4">My cars</h1>
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th><abbr title="">ID</abbr></th>
+              <th>Brand</th>
+              <th>Model</th>
+              <th>Rent</th>
+              <th>Price</th>
+              <th>Return date</th>
+              <th>Place of return</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>BWM</td>
+              <td>Serie 3</td>
+              <td>@User4</td>
+              <td>$40.000</td>
+              <td>14-02-24</td>
+              <td>San Juan</td>
+              <td>
+                <div class="buttons">
+                  <button class="button is-primary">View</button>
+                  <button class="button is-link">Edit</button>
+                  <button class="button is-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
