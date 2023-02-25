@@ -93,15 +93,25 @@ module.exports = class CarController {
     res.render('car/views/create.njk');
   }
 
+  /**
+   * @param {import('express').Request} req
+   * @param {import('express').Response} res
+   */
+
   async save(req, res) {
     const car = fromFormToEntity(req.body);
+    console.log(car);
     if (req.file) {
       const { path } = req.file;
+      console.log(`Aqui va la imagen ${car.img}`);
       car.img = path;
     }
     await this.carService.save(car);
+    console.log(car.id);
     res.redirect('/');
   }
+
+
 
   async delete(req, res) {
     const { id } = req.params;

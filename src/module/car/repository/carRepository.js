@@ -5,219 +5,62 @@ const { fromModelToEntity } = require('../mapper/carMapper');
 
 module.exports = class CarRepository {
   /**
-   * @param {import('better-sqlite3').Database} databaseAdapter
+   * @param {typeof import('../model/carModel')} carModel
    */
-  constructor(databaseAdapter) {
-    this.databaseAdapter = databaseAdapter;
-    // Aqui va si se añade reservacion
+  constructor(carModel) {
+    this.carModel = carModel;
+    // Aqui va si se añade reservacion o usuario. Ambos
   }
 
   /**
    * @param {import('../entity/Car')} car
    */
- // Error en guardar con edit.
-  save(car) {
-    let id;
-    const isUpdate = car.id;
-    if (isUpdate) {
-      id = car.id;
-      const statement = this.databaseAdapter.prepare(`
-        UPDATE cars SET
-          ${car.img ? 'img = ?,' : ''}
-          brand = ?,
-          model = ?,
-          year = ?,
-          kms = ?,
-          colour = ?,
-          air = ?,
-          passenger = ?,
-          transmission = ?,
-          price = ?
-        WHERE id = ?
-      `);
-      const params = [
-        car.brand,
-        car.model,
-        car.year,
-        car.kms,
-        car.colour,
-        car.air,
-        car.passenger,
-        car.transmission,
-        car.price,
-        car.id,
-      ];
 
-      if (car.img) {
-        params.unshift(car.img);
-      }
+  async save(car) {
+    let carModel;
 
-      statement.run(params);
-    } else {
-      const statement = this.databaseAdapter.prepare(`
-      INSERT INTO cars (
-        brand,
-        model,
-        year,
-        kms,
-        colour,
-        air,
-        passenger,
-        img,
-        transmission,
-        price
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+    const buildOptions = { isNewRecord: !car.id };
+    carModel = this.carModel.build(car, buildOptions);
 
-      const result = statement.run(
-        car.brand,
-        car.model,
-        car.year,
-        car.kms,
-        car.colour,
-        car.air,
-        car.passenger,
-        car.img,
-        car.transmission,
-        car.price,
-      );
+    carModel = await carModel.save();
 
-      id = result.lastInsertRowid;
-    }
-
-    return this.getById(id);
+    return fromModelToEntity(carModel);
   }
-
-  /* Segundo. Este de ia
-  save(car) {
-    let id;
-    const isUpdate = car.id;
-    if (isUpdate) {
-      const existingCar = this.getById(car.id);
-      const statement = this.databaseAdapter.prepare(`
-        UPDATE cars SET
-          img = ?,
-          brand = ?,
-          model = ?,
-          year = ?,
-          kms = ?,
-          colour = ?,
-          air = ?,
-          passenger = ?,
-          transmission = ?,
-          price = ?
-        WHERE id = ?
-      `);
-      const params = [
-        car.img || existingCar.img,  // use existing image if none provided
-        car.brand,
-        car.model,
-        car.year,
-        car.kms,
-        car.colour,
-        car.air,
-        car.passenger,
-        car.transmission,
-        car.price,
-        car.id,
-      ];
-      statement.run(params);
-      id = car.id;
-    } else {
-      const statement = this.databaseAdapter.prepare(`
-        INSERT INTO cars (
-          brand,
-          model,
-          year,
-          kms,
-          colour,
-          air,
-          passenger,
-          img,
-          transmission,
-          price
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `);
-      const result = statement.run(
-        car.brand,
-        car.model,
-        car.year,
-        car.kms,
-        car.colour,
-        car.air,
-        car.passenger,
-        car.img,
-        car.transmission,
-        car.price,
-      );
-      id = result.lastInsertRowid;
-    }
-    return this.getById(id);
-  }
-  */
 
   /**
    * @param {import('../entity/Car')} car
-   * @returns {Boolean}
+   * @returns {Promise<Boolean>}
    */
-  delete(car) {
+  async delete(car) {
     if (!car || !car.id) {
-      throw new CarIdNotDefinedError('El ID del car no está definido');
+      throw new CarIdNotDefinedError('The car ID is not defined');
     }
 
-    this.databaseAdapter.prepare('DELETE FROM cars WHERE id = ?').run(car.id);
-
-    return true;
+    return Boolean(await this.carModel.destroy({ where: { id: car.id } }));
   }
 
   /**
    * @param {Number} id
-   * @param {import('../entity/Car')}
+   * @param {Promise<import('../entity/Car')>}
    */
-  getById(id) {
-    const car = this.databaseAdapter
-      .prepare(
-        `SELECT
-              id,
-              brand,
-              model,
-              year,
-              kms,
-              colour,
-              air,
-              passenger,
-              img,
-              transmission,
-              price
-              FROM cars WHERE id = ?`,
-      )
-      .get(id);
-
-    if (car === undefined) {
-      throw new CarNotFoundError(`No se encontró el car con ID: ${id}`);
+  async getById(id) {
+    const carModel = await this.carModel.findOne({
+      where: { id },
+    });
+    if (carModel === undefined) {
+      throw new CarNotFoundError(`Car with ID not found: ${id}`);
     }
 
-    return fromModelToEntity(car);
+    return fromModelToEntity(carModel);
   }
+  /**
+   * @param {import('../entity/Car')} car
+   * @returns {Promise<Boolean>}
+   */
 
-  getAll() {
-    const cars = this.databaseAdapter
-      .prepare(
-        `SELECT
-        id,
-        brand,
-        model,
-        year,
-        kms,
-        colour,
-        air,
-        passenger,
-        img,
-        transmission,
-        price
-    FROM cars`,
-      )
-      .all();
-    return cars.map((carData) => fromModelToEntity(carData));
+  async getAll() {
+    const cars = await this.carModel.findAll();
+    const carsAll = cars.map((car) => fromModelToEntity(car));
+    return carsAll;
   }
 };

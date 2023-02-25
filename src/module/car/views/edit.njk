@@ -2,8 +2,16 @@
 {% block container %}
 <form class="container mt-4 box" action="/car/save" method="POST" enctype="multipart/form-data">
     <h2 class="title">Car with ID: {{car.id}}</h2>
-      <div class="columns is-multiline is-variable is-2-mobile is-0-tablet is-4-desktop is-8-widescreen is-1-fullhd">
+      <div class="columns is-multiline is-variable is-2-mobile is-0-tablet is-4-desktop is-8-widescreen is-1-fullhd mb-4">
         <div class="column is-half">
+          <div class="field">
+            <label class="label">ID</label>
+            <div class="control">
+              <input class="input" type="number" name="id" placeholder="Id" value="{{car.id}}" readonly >
+              <span class="icon is-small is-left">
+              </span>
+            </div>
+          </div>
           <div class="field">
             <label class="label">Brand</label>
             <div class="control has-icons-left">
@@ -34,7 +42,7 @@
           <div class="field">
             <label class="label">Mileage</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" name="kms" placeholder="Enter the car's mileage" value="{{car.kms}}">
+              <input class="input" type="number" name="kms" placeholder="Enter the car's mileage" value="{{car.kms}}">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-road"></i>
               </span>
@@ -109,7 +117,7 @@
           <div class="field">
             <label class="label">Price</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" name="price" placeholder="Enter the price of the car" value="{{car.price}}">
+              <input class="input" type="number" name="price" placeholder="Enter the price of the car" value="{{car.price}}">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-dollar-sign"></i>
               </span>
