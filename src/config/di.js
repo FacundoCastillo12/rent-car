@@ -2,31 +2,49 @@ const path = require('path');
 const {
   default: DIContainer, object, use, factory,
 } = require('rsdi');
-
+const { Sequelize } = require('sequelize');
 const multer = require('multer');
-const Sqlite3Database = require('better-sqlite3');
 
-const { CarController, CarRepository, CarService } = require('../module/car/module');
-const { UserController, UserRepository, UserService } = require('../module/user/module');
+const {
+  CarController, CarRepository, CarService, CarModel,
+} = require('../module/car/module');
+const {
+  UserController, UserRepository, UserService, UserModel,
+} = require('../module/user/module');
+
+const {
+  ReservationController, ReservationService, ReservationRepository, ReservationModel,
+} = require('../module/reservation/module');
+
 // const { ReservationController, UserRepository, UserService } = require('../module/user/module');
-function configureMainDatabaseAdapter() {
-  return new Sqlite3Database(process.env.DB_PATH, { verbose: console.log });
+
+function configureMainSequelizeDatabase() {
+  const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: process.env.DB_PATH,
+  });
+  return sequelize;
 }
 
-// Ver si termino usando o no.
-/*
-function configureSession() {
-  const ONE_WEEK_IN_SECONDS = 604800000;
-
-  const sessionOptions = {
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: ONE_WEEK_IN_SECONDS },
-  };
-  return session(sessionOptions);
+/**
+ * @param {DIContainer} container
+ */
+function configureCarModule(container) {
+  return CarModel.setup(container.get('Sequelize'));
 }
-*/
+
+/**
+ * @param {DIContainer} container
+ */
+function configureUserModule(container) {
+  return UserModel.setup(container.get('Sequelize'));
+}
+/**
+ * @param {DIContainer} container
+ */
+function configureReservationModel(container) {
+  return ReservationModel.setup(container.get('Sequelize'));
+}
 
 function configureMulter() {
   const storage = multer.diskStorage({
@@ -46,7 +64,7 @@ function configureMulter() {
  */
 function addCommonDefinitions(container) {
   container.add({
-    MainDatabaseAdapter: factory(configureMainDatabaseAdapter),
+    Sequelize: factory(configureMainSequelizeDatabase),
     Multer: factory(configureMulter),
   });
 }
@@ -62,7 +80,8 @@ function addCarModuleDefinitions(container) {
       use('CarService'),
     ),
     CarService: object(CarService).construct(use('CarRepository')),
-    CarRepository: object(CarRepository).construct(use('MainDatabaseAdapter')),
+    CarRepository: object(CarRepository).construct(use('CarModel')),
+    CarModel: factory(configureCarModule),
   });
 }
 function addUserModuleDefinitions(container) {
@@ -72,7 +91,18 @@ function addUserModuleDefinitions(container) {
       use('UserService'),
     ),
     UserService: object(UserService).construct(use('UserRepository')),
-    UserRepository: object(UserRepository).construct(use('MainDatabaseAdapter')),
+    UserRepository: object(UserRepository).construct(use('UserModel')),
+    UserModel: factory(configureUserModule),
+  });
+}
+function addReservationModuleDefinitions(container) {
+  container.add({
+    ReservationController: object(ReservationController).construct(
+      use('ReservationService'),
+    ),
+    ReservationService: object(ReservationService).construct(use('ReservationRepository')),
+    ReservationRepository: object(ReservationRepository).construct(use('ReservationModel')),
+    ReservationModel: factory(configureReservationModel),
   });
 }
 
@@ -81,7 +111,6 @@ module.exports = function configureDI() {
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
   addUserModuleDefinitions(container);
-  // user o client
-  // reservaciones
+  addReservationModuleDefinitions(container);
   return container;
 };
