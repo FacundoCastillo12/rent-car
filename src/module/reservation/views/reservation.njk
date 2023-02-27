@@ -1,0 +1,102 @@
+{% extends "views/layouts/base.njk" %} 
+{% block container %}
+
+<form class="container mt-4 " action="/reservation/save" method="POST" >
+  <div class="box m-6 has-background-info">
+    <div class="mb-2">
+      <h1 class="title">Register a reservation</h1>
+    </div>
+    <div class="field">
+      <label for="start-date" class="has-text-black">Start Date</label>
+      <p class="control has-icons-left has-icons-right">
+        <input class="input" type="date" placeholder="Start date" name="start-date" required>
+        <span class="icon is-small is-left">
+          <i class="fa-solid fa-circle-info"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <label for="finish-date" class="has-text-black">Finish Date</label>
+      <p class="control has-icons-left has-icons-right">
+        <input class="input" type="date" placeholder="Finish date" name="finish-date" required>
+        <span class="icon is-small is-left">
+          <i class="fa-solid fa-circle-info"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <label class="has-text-black">Pay Method
+      <div class="control">
+        <label class="radio has-text-black">
+          <input type="radio" name="payment-method" value="Cash" required>
+          Cash
+        </label>
+        <label class="radio has-text-black">
+          <input type="radio" name="payment-method" value="Credit Card" required>
+          Credit Card
+        </label>
+        <label class="radio has-text-black">
+          <input type="radio" name="payment-method" value="Bank Transfer" required>
+          Bank Transfer
+        </label>
+        <label class="radio has-text-black">
+          <input type="radio" name="payment-method" value="Paypal" required
+          >
+          Paypal
+        </label>
+      </label>
+      </div>
+    </div>
+    <div class="field mt-2 mb-4">
+      <div class="select is-fullwidth">
+        <label for="user-id" class="has-text-black">User</label>
+        <select name="user-id" class="select is-fullwidth">
+          {% for user in users %}
+          <option value="{{ user.id }}" required>
+            #{{ user.id }} | {{ user.firstName + " " + user.lastName }} | {{ user.nationality}} | {{user.phone}}
+          </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="field mt-6 mb-4">
+      <div class="select is-fullwidth is-horizontal-scrollable">
+        <label for="car-id" class="has-text-black">Car</label>
+        <select name="car-id" class="select">
+          {% for car in cars %}
+          <option value="{{ car.id }}" required>
+            {{ "#" + car.id + " | " + car.brand + " " + car.model + " " + car.year + " | " + "Price Per Day $ " + car.price + " | "
+            + car.kms + " kms | " + car.passenger + " passengers | " + car.transmission + " | Air conditioning: " + car.air + " | Color: " + car.colour }}
+          </option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="field mt-6">
+      <label for="paid" class="has-text-black">Already paid?</label>
+        <div class="control">
+            <label class="radio">
+              <input type="radio" name="paid" value="Yes" required>
+              Yes
+            </label>
+            <label class="radio">
+              <input type="radio" name="paid" value="No" required>
+              No
+            </label>
+          </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered">
+      <p class="control">
+        <button type="submit" class="button is-primary">
+          Submit
+        </button>
+      </p>
+      <p class="control">
+        <a href="/reservation/manage" class="button is-light">
+          Cancel
+        </a>
+      </p>
+    </div>
+  </div>
+  </form>
+    {% endblock %}

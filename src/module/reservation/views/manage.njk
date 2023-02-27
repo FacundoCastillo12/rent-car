@@ -1,0 +1,53 @@
+{% extends "views/layouts/base.njk" %} 
+{% block container %}
+<div class="columns is-centered mt-6">
+  <div class="column">
+    <div class="table-container">
+      <table class="table is-fullwidth box is-striped is-hoverable is-responsive">
+        <thead>
+          <tr>
+            <th><abbr title="Id">ID</abbr></th>
+            <th>Start Date</th>
+            <th>Finish Date</th>
+            <th>Day Price</th>
+            <th>Total Price</th>
+            <th>Payment Method</th>
+            <th>Car ID</th>
+            <th>User ID</th>
+            <th>isPaid</th>
+            <th>Action{{reservation.id}}</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            {% for reservation in reservations %}
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.startDate }}</td>
+            <td>{{ reservation.finishDate }}</td>
+            <td>{{ reservation.dayPrice }}</td>
+            <td>{{ reservation.totalPrice }}</td>
+            <td>{{ reservation.paymentMethod }}</td>
+            <td><a href="/car/view/{{ reservation.carId }}">{{ reservation.carId }}</a></td>
+            <td><a href="/user/view/{{ reservation.userId }}">{{ reservation.userId }}</a></td>
+            <td>{{ reservation.isPaid }}</td>
+            <td>
+              <div class="buttons">
+                
+                {% if reservation.isPaid === 'No' %}
+                <a href="/reservation/manage/pay/{{reservation.id}}" class="button is-warning">Pay</a>
+              {% endif %}
+                <a href="/reservation/view/{{ reservation.id }}" class="button is-primary">View</a>
+                <a href="/reservation/edit/{{ reservation.id }}" class="button is-info">Edit</a>
+                <a href="/reservation/delete/{{ reservation.id }}" class="button is-danger">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          <div class="has-text-danger-dark is-3">No reservation has been created</div>
+          {% endfor %}
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

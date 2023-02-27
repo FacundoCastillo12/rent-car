@@ -16,8 +16,6 @@ const {
   ReservationController, ReservationService, ReservationRepository, ReservationModel,
 } = require('../module/reservation/module');
 
-// const { ReservationController, UserRepository, UserService } = require('../module/user/module');
-
 function configureMainSequelizeDatabase() {
   const sequelize = new Sequelize({
     dialect: 'sqlite',
@@ -43,7 +41,9 @@ function configureUserModule(container) {
  * @param {DIContainer} container
  */
 function configureReservationModel(container) {
-  return ReservationModel.setup(container.get('Sequelize'));
+  const model = ReservationModel.setup(container.get('Sequelize'));
+  model.setupAssociations(CarModel, UserModel);
+  return model;
 }
 
 function configureMulter() {
@@ -84,6 +84,9 @@ function addCarModuleDefinitions(container) {
     CarModel: factory(configureCarModule),
   });
 }
+/**
+ * @param {DIContainer} container
+ */
 function addUserModuleDefinitions(container) {
   container.add({
     UserController: object(UserController).construct(
@@ -95,10 +98,15 @@ function addUserModuleDefinitions(container) {
     UserModel: factory(configureUserModule),
   });
 }
+/**
+ * @param {DIContainer} container
+ */
 function addReservationModuleDefinitions(container) {
   container.add({
     ReservationController: object(ReservationController).construct(
       use('ReservationService'),
+      use('CarService'),
+      use('UserService'),
     ),
     ReservationService: object(ReservationService).construct(use('ReservationRepository')),
     ReservationRepository: object(ReservationRepository).construct(use('ReservationModel')),
