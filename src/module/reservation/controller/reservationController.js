@@ -26,7 +26,6 @@ module.exports = class ReservationController {
     app.get(`${ROUTE}/edit/:id`, this.edit.bind(this));
     app.post(`${ROUTE}/save`, this.save.bind(this));
     app.get(`${ROUTE}/manage/pay/:id`, this.pay.bind(this));
-    // app.post(`${ROUTE}/finish`, this.finish.bind(this)); // or delete.
     app.get(`${ROUTE}/delete/:id`, this.delete.bind(this));
   }
 

@@ -90,7 +90,6 @@ function addCarModuleDefinitions(container) {
 function addUserModuleDefinitions(container) {
   container.add({
     UserController: object(UserController).construct(
-      use('Multer'),
       use('UserService'),
     ),
     UserService: object(UserService).construct(use('UserRepository')),

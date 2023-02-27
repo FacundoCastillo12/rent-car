@@ -36,7 +36,7 @@ module.exports = class ReservationModel extends Model {
           allowNull: false,
         },
         isPaid: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.STRING,
           allowNull: false,
         },
       },

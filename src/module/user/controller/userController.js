@@ -6,10 +6,7 @@ module.exports = class UserController {
   /**
    * @param {import('../service/userService')} UserService
    */
-  constructor(uploadMiddleware, UserService) {
-    // super();
-
-    this.uploadMiddleware = uploadMiddleware;
+  constructor(UserService) {
     this.userService = UserService;
     this.ROUTE_BASE = '/user';
   }

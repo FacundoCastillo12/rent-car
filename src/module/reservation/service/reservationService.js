@@ -18,6 +18,7 @@ module.exports = class ReservationService {
     if (reservation === undefined) {
       throw new ReservationNotDefinedError();
     }
+
     reservation.fillReservationPrice(car);
     return this.reservationRepository.save(reservation);
   }

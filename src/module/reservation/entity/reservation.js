@@ -6,9 +6,9 @@ module.exports = class Reservation {
        * @param {number} dayPrice
        * @param {number} totalPrice
        * @param {string} paymentMethod
-       * @param {boolean} isPaid
-       * @param {string} carId
-       * @param {string} userId
+       * @param {string} isPaid
+       * @param {number} carId
+       * @param {number} userId
        * @param {string} createdAt
        * @param {string} updatedAt
        */

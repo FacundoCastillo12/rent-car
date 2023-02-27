@@ -1,12 +1,6 @@
 const { fromModelToEntity } = require('../mapper/reservationMapper');
-const { fromModelToEntity: fromCarModelToEntity } = require('../../car/mapper/carMapper');
-const { fromModelToEntity: fromUserModelToEntity } = require('../../user/mapper/userMapper');
-const ReservationNotDefinedError = require('../error/ReservationNotDefinedError');
 const ReservationIdNotDefinedError = require('../error/ReservationIdNotDefinedError');
 const ReservationNotFoundError = require('../error/ReservationNotFoundError');
-const CarModel = require('../../car/model/carModel');
-const UserModel = require('../../user/model/userModel');
-const Reservation = require('../entity/Reservation');
 
 module.exports = class ReservationRepository {
   /**
@@ -14,7 +8,6 @@ module.exports = class ReservationRepository {
    */
   constructor(ReservationModel) {
     this.reservationModel = ReservationModel;
-    // Aqui va si se añade reservacion o usuario. Ambos
   }
 
   /**

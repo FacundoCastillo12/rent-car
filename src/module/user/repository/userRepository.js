@@ -67,5 +67,4 @@ module.exports = class UserRepository {
     const usersAll = users.map((user) => fromModelToEntity(user));
     return usersAll;
   }
-// Actualizar la siguiente.
 };
