@@ -1,0 +1,32 @@
+{% extends "views/layouts/base.njk" %}
+{% block container %}
+<div class="columns is-centered mt-4 mb-2">
+    <div class="column">
+      <div class="card box has-background-info-dark has-text-white is-size-5">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+              <p class="title is-3  has-text-white">First Name: <strong class="text-info">{{user.firstName}}</strong></p>
+              <p class="subtitle is-5  has-text-white">Last Name: <strong class="text-info">{{user.lastName}}</strong></p>
+              <p class="subtitle is-7  has-text-white">ID <strong class="text-info">{{user.id}}</strong></p>
+            </div>
+          </div>
+          <div class="content has-text-justified is-family-sans-serif">
+            <p>Document Type<strong class="text-info">{{user.docType}}</strong></p>
+            <p>Document Number: <strong class="text-info">{{user.docNumber}}</strong> </p>
+            <p>Nationality: <strong class="text-info">{{user.nationality}}</strong></p>
+            <p>Address: <strong class="text-info">{{user.address}}</strong></p>
+            <p>Phone Number: <strong class="text-info">{{user.phone}}</strong></p>
+            <p>Email: <strong class="text-info">{{user.email}}</strong></p>
+            <p>Birthdate: <strong class="text-info">{{user.formattedBirthdate}}</strong></p>
+            <div>
+              <a href="/user/edit/{{user.id}}" class="button is-info">Edit</a>
+              <a href="/user/delete/{{user.id}}" class="button is-danger">Delete</a>
+              <a href="/user/manage" class="button is-info">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

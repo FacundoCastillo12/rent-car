@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Car Rental</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/ab08b8898e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="/public/css/main.css" />
+  </head>
+  <body class="has-background-primary-dark has-text-centered grid-container">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/car">
+          <img src="/public/img/logolarge.jpg" alt="Rent car logo" width="112" height="28" />
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="/"> Home </a>
+          <a class="navbar-item"> Rent a Car </a>
+          <a class="navbar-item" href="/car/add"> Create Car </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> More </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/car/manage"> Manage Car </a>
+              <a class="navbar-item"> Manage User </a>
+              <hr class="navbar-divider" />
+              <a class="navbar-item" href="https://github.com/FacundoCastillo12/rent-car/issues/new">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a href="/user/login" class="button is-light"> Log in </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="container menu">
+
+  <div class="container menu">
+
+    <form class="container mt-4 " action="/user/save" method="POST" enctype="multipart/form-data">
+      <div class="box m-6 has-background-info">
+        <div class="mb-2">
+          <h1 class="title">Register a reservation</h1>
+        </div>
+        <div class="field">
+          <label for="start-date" class="has-text-black">Start Date</label>
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="date" placeholder="Start date" name="start-date" value="{{ reservation.startDate }}">
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-circle-info"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label for="finish-date" class="has-text-black">Finish Date</label>
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" type="date" placeholder="Finish date" name="finish-date" value="{{ reservation.finishDate }}">
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-circle-info"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+            <label class="has-text-black">Pay Method
+          <div class="control">
+            <label class="radio has-text-black">
+              <input type="radio" name="payment-method" {{ 'checked' if reservation.paymentMethod === 'Cash' }} value="Cash">
+              Cash
+            </label>
+            <label class="radio has-text-black">
+              <input type="radio" name="payment-method" {{ 'checked' if reservation.paymentMethod === 'Credit Card' }} value="Credit Card">
+              Credit Card
+            </label>
+            <label class="radio has-text-black">
+              <input type="radio" name="payment-method" {{ 'checked' if reservation.paymentMethod === 'Bank Transfer' }} value="Bank Transfer">
+              Bank Transfer
+            </label>
+            <label class="radio has-text-black">
+                <input type="radio" name="payment-method" {{ 'checked' if reservation.paymentMethod === 'Paypal' }} value="Paypal">
+                Paypal
+              </label>
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="select is-multiple">
+            <label for="user-id" class="has-text-black">User</label>
+            <select multiple size="5" name="user-id" class="select is-fullwidth">
+              {% for user in users %}
+              <option value="{{ user.id }}" {{ 'selected' if reservation.userId === user.id }}>
+                #{{ user.id }} - {{ user.firstName + " " + user.lastName }}
+              </option>
+            {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <div class="select is-multiple is-horizontal-scrollable">
+            <label for="car-id" class="has-text-black">Car</label>
+            <select multiple size="5" name="car-id" class="select is-fullwidth">
+              {% for car in cars %}
+              <option value="{{ car.id }}" {{ 'selected' if reservation.carId === car.id }}>
+                {{ "#" + car.id + " - " + car.brand + " " + car.model + " " + car.year + " - " + "Price Per Day $ " + car.price + " - "
+                + car.kms + " kms - " + car.passenger + " passengers - " + car.transmission + " - Air condition: " + car.air + " - Color: " + car.colour }}
+              </option>
+              <option value="{{ car.id }}" {{ 'selected' if reservation.carId === car.id }}>
+                {{ "#" + car.id + " - " + car.brand + " " + car.model + " " + car.year }}
+                <small>
+                  <br>Price Per Day $ {{ car.price }}
+                  <br>{{ car.kms }} kms - {{ car.passenger }} passengers - {{ car.transmission }}
+                  <br>Air conditioning: {{ car.air }} - Color: {{ car.colour }}
+                </small>
+              </option>
+            {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="paid" class="has-text-black">Already paid?</label>
+            <div class="control">
+                <label class="radio">
+                  <input type="radio" name="paid">
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" name="paid">
+                  No
+                </label>
+              </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-success mb-1" id="">
+                    Calculate price
+                  </button>
+                  <input class="input" type="number" placeholder="Click the button to calculate the price or insert a total price" name="total-price" value="">
+              </div>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button type="submit" class="button is-success">
+              Create
+            </button>
+          </p>
+        </div>
+      </div>
+      </form>
+  </div>
+    </div>
+    </section>
+    <footer class="footer has-background-grey-light">
+      <div class="content has-text-centered">
+        <p>
+          Logo imagen
+          <a
+            href="https://www.freepik.es/vector-gratis/logotipo-profesional-alquiler-coches_29028119.htm#query=logo%20rent%20car&position=0&from_view=search&track=scalerv1"
+            >Freepik</a
+          >
+        </p>
+      </div>
+    </footer>
+    <script type="text/javascript" src="/public/js/toogle-navbar.js"></script>
+  </body>
+</html>

@@ -24,6 +24,7 @@ module.exports = class UserController {
     app.get(`${ROUTE}/manage`, this.manage.bind(this));
     app.get(`${ROUTE}/view/:id`, this.view.bind(this));
     app.get(`${ROUTE}/edit/:id`, this.edit.bind(this));
+    app.get(`${ROUTE}/delete/:id`, this.delete.bind(this));
     app.get(`${ROUTE}/add`, this.create.bind(this));
     app.post(`${ROUTE}/save`, this.save.bind(this));
   }
@@ -33,9 +34,9 @@ module.exports = class UserController {
    * @param {import('express').Response} res
    */
   async manage(req, res) {
-    const user = await this.userService.getAll();
+    const users = await this.userService.getAll();
     res.render('user/views/manage.njk', {
-      user,
+      users,
     });
   }
 
@@ -49,10 +50,9 @@ module.exports = class UserController {
       throw new UserIdNotDefinedError();
     }
 
-    const { user, reservations } = await this.userService.getById(id);
+    const user = await this.userService.getById(id);
     res.render('user/views/view.njk', {
       user,
-      reservations,
     });
   }
 
@@ -86,12 +86,8 @@ module.exports = class UserController {
    */
   async save(req, res) {
     const user = fromFormToEntity(req.body);
-    if (req.file) {
-      const { path } = req.file;
-      user.img = path;
-    }
     await this.userService.save(user);
-    res.redirect('/');
+    res.redirect('/user/manage');
   }
 
   /**
@@ -102,6 +98,6 @@ module.exports = class UserController {
     const { id } = req.params;
     const user = await this.userService.getById(id);
     await this.userService.delete(user);
-    res.redirect('/');
+    res.redirect('/user/manage');
   }
 };

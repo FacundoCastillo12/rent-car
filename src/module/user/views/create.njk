@@ -1,0 +1,113 @@
+{% extends "views/layouts/base.njk" %}
+  {% block container %}
+  <form class="container mt-4 " action="/user/save" method="POST" >
+    <div class="box m-6 has-background-info">
+      <div class="mb-2">
+        <h1 class="title">Register a new user</h1>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="First name" name="first-name" required>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-circle-info"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Last name" name="last-name" required>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-circle-info"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="number" placeholder="Document Number" name="doc-number" required>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-id-card"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="text" placeholder="Address" name="address" required>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="number" placeholder="Phone number" name="phone" required>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Email" name="email" required>
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="date" placeholder="12-23-43" name="birthdate" required>
+          <span class="icon is-small is-left">
+            <i class="fa-solid fa-cake-candles"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <span class="select">
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-address-card"></i>
+            </span>
+            <select name="doc-type" required>
+              <option value="" disabled>Document Type</option>
+              <option value="CI">CI</option>
+              <option value="DNI">DNI</option>
+              <option value="RG">RG</option>
+              <option value="Passport">Passport</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <span class="select">
+            <span class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </span>
+            <select name="nationality" required>
+              <option value="" disabled>Nationality</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Chile">Chile</option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Brasil">Brasil</option>
+              <option value="Bolivia">Bolivia</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <div class="field is-grouped is-grouped-centered">
+        <p class="control">
+          <button type="submit" class="button is-primary">
+            Submit
+          </button>
+        </p>
+        <p class="control">
+          <a href="/reservation/manage" class="button is-light">
+            Cancel
+          </a>
+        </p>
+      </div>
+    </div>
+    </form>
+    {% endblock %}

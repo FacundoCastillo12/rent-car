@@ -1,0 +1,51 @@
+{% extends "views/layouts/base.njk" %} 
+{% block container %}
+<div class="columns is-centered mt-6">
+  <div class="column">
+    <div class="table-container">
+      <table class="table is-fullwidth box is-striped is-hoverable is-responsive">
+        <thead>
+          <tr>
+            <th><abbr title="Id">ID</abbr></th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Doc.Type</th>
+            <th>Doc.Number</th>
+            <th>Nationality</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>E-mail</th>
+            <th>Birthdate</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            {% for user in users %}
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.docType }}</td>
+            <td>{{ user.docNumber }}</td>
+            <td>{{ user.nationality }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.formattedBirthdate }}</td>
+            <td>
+              <div class="buttons">
+                <a href="/user/view/{{ user.id }}" class="button is-primary">View</a>
+                <a href="/user/edit/{{ user.id }}" class="button is-info">Edit</a>
+                <a href="/user/delete/{{ user.id }}" class="button is-danger">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% else %}
+          <div class="has-text-danger-dark is-3">No user has been created</div>
+          {% endfor %}
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
