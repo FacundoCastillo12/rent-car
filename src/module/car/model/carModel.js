@@ -36,7 +36,7 @@ module.exports = class CarModel extends Model {
           allowNull: false,
         },
         air: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         passenger: {
@@ -47,7 +47,7 @@ module.exports = class CarModel extends Model {
           type: DataTypes.INTEGER,
         },
         transmission: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         price: {

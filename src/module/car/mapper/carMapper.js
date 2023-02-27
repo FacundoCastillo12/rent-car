@@ -25,7 +25,7 @@ exports.fromModelToEntity = ({
   passenger,
   img,
   transmission,
-  price,
+  Number(price),
   createdAt,
   updatedAt,
 );

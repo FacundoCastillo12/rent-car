@@ -17,9 +17,7 @@
             <th>Passengers</th>
             <th>Transmission</th>
             <th>Image</th>
-            <th>Rent</th>
-            <th>Date of delivery</th>
-            <th>Price</th>
+            <th>Price for day</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -36,13 +34,14 @@
             <td>{{ car.passenger }}</td>
             <td>{{ car.transmission }}</td>
             <td>
+              <figure class="image is-128x128">
               <img src="\..\{{ car.img }}" alt="Photo of a car:{{ car.brand }} {{ car.model }}" />
+            </figure>
             </td>
-            <td><a>@Usuario</a></td>
-            <td>Date</td>
             <td>${{ car.price }}</td>
             <td>
               <div class="buttons">
+                <a href="/reservation/add" class="button is-link">Rent</a>
                 <a href="/car/view/{{ car.id }}" class="button is-primary">View</a>
                 <a href="/car/edit/{{ car.id }}" class="button is-info">Edit</a>
                 <a href="/car/delete/{{ car.id }}" class="button is-danger">Delete</a>

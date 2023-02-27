@@ -1,19 +1,15 @@
 /* eslint-disable class-methods-use-this */
 const { fromFormToEntity } = require('../mapper/carMapper');
 const CarIdNotDefinedError = require('./error/CarIdNotDefinedError');
-// Aqui va el error de id.
 
 module.exports = class CarController {
   /**
    * @param {import('../service/carService')} CarService
    */
   constructor(uploadMiddleware, CarService) {
-    // super();
-
     this.uploadMiddleware = uploadMiddleware;
     this.carService = CarService;
     this.ROUTE_BASE = '/car';
-    // Ver si necesita una segunda vista para luego. O agregar arriba todo.
   }
 
   /**
@@ -100,18 +96,13 @@ module.exports = class CarController {
 
   async save(req, res) {
     const car = fromFormToEntity(req.body);
-    console.log(car);
     if (req.file) {
       const { path } = req.file;
-      console.log(`Aqui va la imagen ${car.img}`);
       car.img = path;
     }
     await this.carService.save(car);
-    console.log(car.id);
-    res.redirect('/');
+    res.redirect('/car/manage');
   }
-
-
 
   async delete(req, res) {
     const { id } = req.params;
@@ -120,8 +111,3 @@ module.exports = class CarController {
     res.redirect('/car');
   }
 };
-
-/*
-
-Form: IGual a add
-*/

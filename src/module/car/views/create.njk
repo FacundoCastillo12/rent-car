@@ -7,7 +7,7 @@
           <div class="field">
             <label class="label">Brand</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" name="brand" placeholder="Enter the car brand">
+              <input class="input" type="text" name="brand" placeholder="Enter the car brand" required>
               <span class="icon is-small is-left">
                 <i class="fa-sharp fa-solid fa-car"></i>
               </span>
@@ -16,7 +16,7 @@
           <div class="field">
             <label class="label">Model</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" name="model" placeholder="Enter the car model">
+              <input class="input" type="text" name="model" placeholder="Enter the car model" required>
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-car-side"></i>
               </span>
@@ -25,7 +25,7 @@
           <div class="field">
             <label class="label">Year</label>
             <div class="control has-icons-left">
-              <input class="input" type="number" name="year" placeholder="Enter model year" max="9999">
+              <input class="input" type="number" name="year" placeholder="Enter model year" max="9999" required>
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-calendar"></i>
               </span>
@@ -34,7 +34,7 @@
           <div class="field">
             <label class="label">Mileage</label>
             <div class="control has-icons-left">
-              <input class="input" type="number" name="kms" placeholder="Enter the car's mileage">
+              <input class="input" type="number" name="kms" placeholder="Enter the car's mileage" required>
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-road"></i>
               </span>
@@ -43,7 +43,7 @@
           <div class="field">
             <label class="label">Colors</label>
             <div class="control has-icons-left">
-              <input class="input" type="text" name="colour" placeholder="Enter the colors of the car">
+              <input class="input" type="text" name="colour" placeholder="Enter the colors of the car" required>
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-palette"></i>
               </span>
@@ -53,11 +53,11 @@
             <label class="label">Air-conditioning</label>
             <div class="control">
               <label class="radio">
-                <input type="radio" name="air" value="Yes" checked>
+                <input type="radio" name="air" value="Yes" checked required>
                 Yes
               </label>
               <label class="radio">
-                <input type="radio" name="air" value="No">
+                <input type="radio" name="air" value="No" required>
                 No
               </label>
             </div>
@@ -69,7 +69,7 @@
                 <span class="icon is-small is-left">
                   <i class="fa-sharp fa-solid fa-person"></i>
                 </span>
-                <select name="passenger">
+                <select name="passenger" required>
                   <option disabled value="">Select an option</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -88,7 +88,7 @@
           <div class="field">
             <label class="label">Image</label>
             <div class="control has-icons-left">
-              <input class="input" type="file" name="img">
+              <input class="input" type="file" name="img" required>
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-image"></i>
               </span>
@@ -98,7 +98,7 @@
             <label class="label">Transmission</label>
             <div class="control">
               <div class="select">
-                <select name="transmission">
+                <select name="transmission" required>
                   <option value="" disabled>Select an option</option>
                   <option value="Manual">Manual</option>
                   <option value="Automatic">Automatic</option>
@@ -109,7 +109,7 @@
           <div class="field">
             <label class="label">Price for day:</label>
             <div class="control has-icons-left">
-              <input class="input" type="number" name="price" placeholder="Enter the price of the car">
+              <input class="input" type="number" name="price" placeholder="Enter the price for day of the car" required>
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-dollar-sign"></i>
               </span>

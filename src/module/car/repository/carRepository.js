@@ -9,7 +9,6 @@ module.exports = class CarRepository {
    */
   constructor(carModel) {
     this.carModel = carModel;
-    // Aqui va si se añade reservacion o usuario. Ambos
   }
 
   /**
@@ -44,9 +43,8 @@ module.exports = class CarRepository {
    * @param {Promise<import('../entity/Car')>}
    */
   async getById(id) {
-    const carModel = await this.carModel.findOne({
-      where: { id },
-    });
+    const carModel = await this.carModel.findByPk(id);
+
     if (carModel === undefined) {
       throw new CarNotFoundError(`Car with ID not found: ${id}`);
     }
