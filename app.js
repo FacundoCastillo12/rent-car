@@ -3,10 +3,10 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 
-const configureDependencyInjection = require('./config/di');
-const { init: initCarModule } = require('./module/car/module');
-const { init: initUserModule } = require('./module/user/module');
-const { init: initReservationModule } = require('./module/reservation/module');
+const configureDependencyInjection = require('./src/config/di');
+const { init: initCarModule } = require('./src/module/car/module');
+const { init: initUserModule } = require('./src/module/user/module');
+const { init: initReservationModule } = require('./src/module/reservation/module');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,7 +27,7 @@ initUserModule(app, container);
 initReservationModule(app, container);
 
 /**
- * @type {import('./module/car/controller/carController')} carController;
+ * @type {import('./src/module/car/controller/carController')} carController;
  */
 const carController = container.get('CarController');
 app.get('/', carController.index.bind(carController));
