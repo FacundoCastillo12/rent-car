@@ -9,7 +9,7 @@ const { init: initUserModule } = require('../src/module/user/module');
 const { init: initReservationModule } = require('../src/module/reservation/module');
 
 const app = express();
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -32,4 +32,5 @@ initReservationModule(app, container);
 const carController = container.get('CarController');
 app.get('/', carController.index.bind(carController));
 
-app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
+module.exports = app;
+// app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));

@@ -13,6 +13,9 @@
     "test": "jest --verbose",
     "jest": "jest --coverage",
     "test:watch": "jest --watch",
+    "table": "node src/cli/init.db.js",
+    "begin": "node index.js",
+    "begin:table": "npm run table & npm run begin",
     "start:schema:sync": "npm run schema:sync & npm run start"
   },
   "repository": {
